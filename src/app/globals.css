@@ -25,3 +25,17 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+@layer base {
+  .contentPost {
+    @apply text-[#6B6B6B] mt-10;
+  }
+
+  .contentPost h3 {
+    @apply font-semibold text-3xl mb-4 mt-14;
+  }
+
+  .contentPost p {
+    @apply mb-5;
+  }
+}

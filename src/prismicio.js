@@ -1,7 +1,6 @@
 import * as prismic from "@prismicio/client";
 import * as prismicNext from "@prismicio/next";
 import config from "../slicemachine.config.json";
-
 /**
  * The project's Prismic repository name.
  */
@@ -18,7 +17,7 @@ export const repositoryName =
 // TODO: Update the routes array to match your project's route structure.
 const routes = [
   {
-  	type: "posts",
+  	type: "artigo",
   	path: "/:uid",
   },
 ];
@@ -31,7 +30,7 @@ const routes = [
  */
 export const createClient = (config = {}) => {
   const client = prismic.createClient(repositoryName, {
-    accessToken: process.env.ACCESS_TOKEN,
+    accessToken: process.env.ACCESS_TOKEN_PRISMIC,
     routes,
     fetchOptions:
       process.env.NODE_ENV === "production"

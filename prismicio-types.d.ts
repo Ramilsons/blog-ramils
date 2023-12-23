@@ -4,6 +4,133 @@ import type * as prismic from "@prismicio/client";
 
 type Simplify<T> = { [KeyType in keyof T]: T[KeyType] };
 
+type ArtigoDocumentDataSlicesSlice = TextSlice;
+
+/**
+ * Content for artigo documents
+ */
+interface ArtigoDocumentData {
+  /**
+   * Titulo field in *artigo*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.title
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Subtítulo field in *artigo*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.subtitle
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  subtitle: prismic.RichTextField;
+
+  /**
+   * Data de Criação field in *artigo*
+   *
+   * - **Field Type**: Date
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.created_at
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#date
+   */
+  created_at: prismic.DateField;
+
+  /**
+   * Banner field in *artigo*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.banner
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  banner: prismic.ImageField<never>;
+
+  /**
+   * Autor field in *artigo*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.author
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  author: prismic.RichTextField;
+
+  /**
+   * content field in *artigo*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.content
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  content: prismic.RichTextField;
+
+  /**
+   * Slice Zone field in *artigo*
+   *
+   * - **Field Type**: Slice Zone
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.slices[]
+   * - **Tab**: Main
+   * - **Documentation**: https://prismic.io/docs/field#slices
+   */
+  slices: prismic.SliceZone<ArtigoDocumentDataSlicesSlice> /**
+   * Meta Description field in *artigo*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A brief summary of the page
+   * - **API ID Path**: artigo.meta_description
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */;
+  meta_description: prismic.KeyTextField;
+
+  /**
+   * Meta Image field in *artigo*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: artigo.meta_image
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#image
+   */
+  meta_image: prismic.ImageField<never>;
+
+  /**
+   * Meta Title field in *artigo*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: A title of the page used for social media and search engines
+   * - **API ID Path**: artigo.meta_title
+   * - **Tab**: SEO & Metadata
+   * - **Documentation**: https://prismic.io/docs/field#key-text
+   */
+  meta_title: prismic.KeyTextField;
+}
+
+/**
+ * artigo document from Prismic
+ *
+ * - **API ID**: `artigo`
+ * - **Repeatable**: `true`
+ * - **Documentation**: https://prismic.io/docs/custom-types
+ *
+ * @typeParam Lang - Language API ID of the document.
+ */
+export type ArtigoDocument<Lang extends string = string> =
+  prismic.PrismicDocumentWithUID<Simplify<ArtigoDocumentData>, "artigo", Lang>;
+
 type PostsDocumentDataSlicesSlice = never;
 
 /**
@@ -109,7 +236,49 @@ interface PostsDocumentData {
 export type PostsDocument<Lang extends string = string> =
   prismic.PrismicDocumentWithUID<Simplify<PostsDocumentData>, "posts", Lang>;
 
-export type AllDocumentTypes = PostsDocument;
+export type AllDocumentTypes = ArtigoDocument | PostsDocument;
+
+/**
+ * Primary content in *Text → Items*
+ */
+export interface TextSliceDefaultItem {
+  /**
+   * TextContent field in *Text → Items*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: text.items[].text_content
+   * - **Documentation**: https://prismic.io/docs/field#rich-text-title
+   */
+  text_content: prismic.RichTextField;
+}
+
+/**
+ * Default variation for Text Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Record<string, never>,
+  Simplify<TextSliceDefaultItem>
+>;
+
+/**
+ * Slice variation for *Text*
+ */
+type TextSliceVariation = TextSliceDefault;
+
+/**
+ * Text Shared Slice
+ *
+ * - **API ID**: `text`
+ * - **Description**: Text
+ * - **Documentation**: https://prismic.io/docs/slice
+ */
+export type TextSlice = prismic.SharedSlice<"text", TextSliceVariation>;
 
 declare module "@prismicio/client" {
   interface CreateClient {
@@ -121,10 +290,17 @@ declare module "@prismicio/client" {
 
   namespace Content {
     export type {
+      ArtigoDocument,
+      ArtigoDocumentData,
+      ArtigoDocumentDataSlicesSlice,
       PostsDocument,
       PostsDocumentData,
       PostsDocumentDataSlicesSlice,
       AllDocumentTypes,
+      TextSlice,
+      TextSliceDefaultItem,
+      TextSliceVariation,
+      TextSliceDefault,
     };
   }
 }

@@ -1,15 +1,17 @@
 import { createClient } from "@/prismicio";
+import { asHTML } from "@prismicio/client";
 
 import Banner from "../banner";
 import TitlePost from "../titlePost";
 import SubTitle from "../subTitle";
 import ReleaseInfos from "../realeaseInfos";
 
+
 export default async function Page({params}) {
     let slug = params.slug;
     
     const client = createClient();
-    const post = await client.getByUID('posts', slug);
+    const post = await client.getByUID('artigo', slug);
 
     const data = {
         titleH1: post.data.title[0].text,
@@ -19,17 +21,19 @@ export default async function Page({params}) {
             source: post.data.banner.url,
             altText: post.data.banner.alt
         },
-        author: "Ramilson Silva"
+        author: post.data.author[0].text,
+        content: asHTML(post.data.content)
     }
 
     return (
-        <div className="h-[100vh] bg-[#fff]">
+        <div className="bg-[#fff]">
             <div className="w-[85vw] mx-auto pt-[100px]">
                 <Banner source={data.banner.source} alt={data.banner.altText} />
                 <TitlePost text={data.titleH1} />
                 <SubTitle text={data.subtitleH2} />
-
                 <ReleaseInfos date={data.releaseDate} author={data.author} />
+
+                <div className="contentPost" dangerouslySetInnerHTML={{__html: data.content}} />
             </div>
         </div>
     );

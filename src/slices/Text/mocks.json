@@ -1,0 +1,28 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {},
+		"items": [
+			{
+				"__TYPE__": "GroupItemContent",
+				"value": [
+					[
+						"text_content",
+						{
+							"__TYPE__": "StructuredTextContent",
+							"value": [
+								{
+									"type": "paragraph",
+									"content": {
+										"text": "Nostrud excepteur cillum nulla do sit do est officia id voluptate Lorem ex non nulla. Magna consequat aliqua aliqua."
+									}
+								}
+							]
+						}
+					]
+				]
+			}
+		]
+	}
+]

@@ -10,9 +10,9 @@ export default async function ReleaseInfos(props) {
     }
 
     return (
-        <div className="pt-4 flex">
+        <div className="pt-4 flex items-center">
             <p className="text-sm text-[#898888] font-bold">{formatDate(props.date)}</p>
-            <div className="w-[2px] h-auto bg-[#8F8F8F] mx-3" />
+            <div className="w-[2px] h-[5px] w-[5px] rounded-[50%] bg-[#cac8c8] mx-3" />
             <p className="text-sm text-[#898888] font-extralight">{props.author}</p>
         </div>
     );
