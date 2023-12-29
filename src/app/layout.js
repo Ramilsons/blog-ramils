@@ -1,9 +1,9 @@
 import { PrismicPreview } from '@prismicio/next'
+import { Fonts } from '../../custom/fonts';
 
-import { Roboto } from 'next/font/google'
 import './globals.css'
+import Footer from './common/footer';
 
-const roboto = Roboto({ subsets: ['latin'], weight: ["100", "300", "400", "500", "700", "900"] })
 
 export const metadata = {
   title: 'Blog do Ramilson',
@@ -13,7 +13,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
-      <body className={roboto.className}>{children}</body>
+      <body className={`${Fonts.roboto.variable} ${Fonts.roboto_serif.variable} bg-white`}>
+        {children}
+        <Footer />
+      </body>
       <PrismicPreview repositoryName={'blog-ramils'} />
     </html>
   )

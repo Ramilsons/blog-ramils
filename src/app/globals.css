@@ -28,14 +28,14 @@ body {
 
 @layer base {
   .contentPost {
-    @apply text-[#6B6B6B] mt-10;
+    @apply mt-10 text-[#4e4e4e];
   }
 
   .contentPost h3 {
-    @apply font-semibold text-3xl mb-4 mt-14;
+    @apply font-semibold text-xl mb-4 mt-14 font-sansRoboto;
   }
 
   .contentPost p {
-    @apply mb-5;
+    @apply mb-5 font-serifRoboto text-base leading-7 sm:leading-8;
   }
 }

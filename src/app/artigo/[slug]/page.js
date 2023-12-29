@@ -5,7 +5,7 @@ import Banner from "../banner";
 import TitlePost from "../titlePost";
 import SubTitle from "../subTitle";
 import ReleaseInfos from "../realeaseInfos";
-
+import Footer from "@/app/common/footer";
 
 export default async function Page({params}) {
     let slug = params.slug;
@@ -26,14 +26,14 @@ export default async function Page({params}) {
     }
 
     return (
-        <div className="bg-[#fff]">
-            <div className="w-[85vw] mx-auto pt-[100px]">
+        <div className="bg-[#fff] min-h-[100vh]">
+            <div className="w-[85vw] mx-auto pt-[100px] max-w-[700px]">
                 <Banner source={data.banner.source} alt={data.banner.altText} />
                 <TitlePost text={data.titleH1} />
                 <SubTitle text={data.subtitleH2} />
                 <ReleaseInfos date={data.releaseDate} author={data.author} />
 
-                <div className="contentPost" dangerouslySetInnerHTML={{__html: data.content}} />
+                <div className={`contentPost`} dangerouslySetInnerHTML={{__html: data.content}} />
             </div>
         </div>
     );
