@@ -16,7 +16,7 @@ module.exports = {
     fontFamily: {
       sansRoboto: ['var(--font-sans-roboto)'],
       serifRoboto: ['var(--font-serif-roboto)']
-    },
+    }
   },
   plugins: [],
 }

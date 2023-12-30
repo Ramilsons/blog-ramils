@@ -27,7 +27,7 @@ export default async function Page({params}) {
 
     return (
         <div className="bg-[#fff] min-h-[100vh]">
-            <div className="w-[85vw] mx-auto pt-[100px] max-w-[700px]">
+            <div className="mainContainer pt-[100px] ">
                 <Banner source={data.banner.source} alt={data.banner.altText} />
                 <TitlePost text={data.titleH1} />
                 <SubTitle text={data.subtitleH2} />

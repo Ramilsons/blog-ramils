@@ -2,6 +2,7 @@ import { PrismicPreview } from '@prismicio/next'
 import { Fonts } from '../../custom/fonts';
 
 import './globals.css'
+import Header from './common/header';
 import Footer from './common/footer';
 
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br">
       <body className={`${Fonts.roboto.variable} ${Fonts.roboto_serif.variable} bg-white`}>
+        <Header />
         {children}
         <Footer />
       </body>

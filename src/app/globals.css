@@ -38,4 +38,12 @@ body {
   .contentPost p {
     @apply mb-5 font-serifRoboto text-base leading-7 sm:leading-8;
   }
+
+  .homeIcon:hover svg path{
+    @apply stroke-[#64DEE5]
+  }
+
+  .mainContainer {
+    @apply w-[85vw] mx-auto max-w-[700px];
+  }
 }
