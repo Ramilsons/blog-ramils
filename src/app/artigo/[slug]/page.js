@@ -5,7 +5,6 @@ import Banner from "../banner";
 import TitlePost from "../titlePost";
 import SubTitle from "../subTitle";
 import ReleaseInfos from "../realeaseInfos";
-import Footer from "@/app/common/footer";
 
 export default async function Page({params}) {
     let slug = params.slug;
@@ -33,7 +32,7 @@ export default async function Page({params}) {
                 <SubTitle text={data.subtitleH2} />
                 <ReleaseInfos date={data.releaseDate} author={data.author} />
 
-                <div className={`contentPost`} dangerouslySetInnerHTML={{__html: data.content}} />
+                <div className={`contentPost mb-[100px]`} dangerouslySetInnerHTML={{__html: data.content}} />
             </div>
         </div>
     );

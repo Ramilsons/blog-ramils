@@ -6,7 +6,7 @@ import PortfolioIcon from "./portfolio"
 
 export default function Footer () {
     return (
-        <div className="bg-[#F9F9F9] py-14 mt-[100px]">
+        <div className="bg-[#F9F9F9] py-14">
             <div className="mainContainer sm:flex justify-between items-end">
                 <div>
                     <Image className="rounded-[50%]" src={'/eu-2-cut.jpg'} height={67} width={67} alt="Foto de Ramilson Silva" />
