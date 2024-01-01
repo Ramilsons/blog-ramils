@@ -46,4 +46,12 @@ body {
   .mainContainer {
     @apply w-[85vw] mx-auto max-w-[700px];
   }
+  
+  .mainContainerHome {
+    @apply w-[85vw] mx-auto max-w-[1600px];
+  }
+
+  .defaultHeight {
+    @apply min-h-[calc(100vh-345px)];
+  }
 }

@@ -1,5 +1,6 @@
 import { createClient } from '@/prismicio';
 
+import HeaderHome from './home/headerHome';
 import MainPost from './home/mainPost';
 import ShelveHome from './home/shelveHome';
 
@@ -22,9 +23,13 @@ export default async function Home() {
   const allPostsWithoutLast = allPosts.results.filter((value, index) => index > 0);
 
   return (
-    <main className="">
-      <MainPost lastPostData={lastPostData} />
-      <ShelveHome title={'Mais Posts'} posts={allPostsWithoutLast} totalPosts={allPosts.results.length}  />
+    <main>
+      <HeaderHome />
+
+      <div className="lg:mainContainerHome defaultHeight">
+        <MainPost lastPostData={lastPostData} />
+        <ShelveHome title={'Mais Posts'} posts={allPostsWithoutLast} totalPosts={allPosts.results.length}  />
+      </div>
     </main>
   )
 }

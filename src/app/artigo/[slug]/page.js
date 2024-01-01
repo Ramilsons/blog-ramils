@@ -1,6 +1,7 @@
 import { createClient } from "@/prismicio";
 import { asHTML } from "@prismicio/client";
 
+import Header from "@/app/common/header";
 import Banner from "../banner";
 import TitlePost from "../titlePost";
 import SubTitle from "../subTitle";
@@ -25,16 +26,19 @@ export default async function Page({params}) {
     }
 
     return (
-        <div className="bg-[#fff] min-h-[100vh]">
-            <div className="mainContainer pt-[100px] ">
+        <>
+        <Header />
+        <div className="bg-[#fff] defaultHeight">
+            <div className="mainContainer pt-[50px]">
                 <Banner source={data.banner.source} alt={data.banner.altText} />
                 <TitlePost text={data.titleH1} />
                 <SubTitle text={data.subtitleH2} />
                 <ReleaseInfos date={data.releaseDate} author={data.author} />
 
-                <div className={`contentPost mb-[100px]`} dangerouslySetInnerHTML={{__html: data.content}} />
+                <article className={`contentPost mb-[100px]`} dangerouslySetInnerHTML={{__html: data.content}} />
             </div>
         </div>
+        </>
     );
 }
 
