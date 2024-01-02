@@ -7,12 +7,15 @@ import TitlePost from "../titlePost";
 import SubTitle from "../subTitle";
 import ReleaseInfos from "../realeaseInfos";
 
+import domain from "../../../../custom/domain";
+
+let slug = '';
 export default async function Page({params}) {
-    let slug = params.slug;
+    slug = params.slug;
     
     const client = createClient();
     const post = await client.getByUID('artigo', slug);
-
+    
     const data = {
         titleH1: post.data.title[0].text,
         subtitleH2:post.data.subtitle[0].text,
@@ -40,6 +43,30 @@ export default async function Page({params}) {
         </div>
         </>
     );
+}
+
+export async function generateMetadata() {
+    const client = createClient();
+    const post = await client.getByUID('artigo', slug);
+
+    return {
+        title: `${post.data.title[0].text} | Blog do Ramils`,
+        description: post.data.subtitle[0].text,
+        twitter: {
+            card: 'summary_large_image',
+            title: post.data.title[0].text,
+            description: post.data.subtitle[0].text,
+            creator: 'Ramilson Silva',
+            images: post.data.banner.url
+        },
+        openGraph: {
+            type: "article",
+            url: `${domain}/artigo/${slug}`,
+            title: post.data.title[0].text,
+            description: post.data.subtitle[0].text,
+            images: [{url: post.data.banner.url, width: 320, height: 160}],
+        }
+    }
 }
 
 
