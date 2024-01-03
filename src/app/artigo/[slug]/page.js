@@ -28,19 +28,29 @@ export default async function Page({params}) {
         content: asHTML(post.data.content)
     }
 
+    let allContentPost = post.data.content.filter((value, index) => value.type == 'paragraph');
+    let allContentString = '';
+
+    allContentPost.forEach((value) => {
+        allContentString += value.text.replace('\n', ' ');
+    })
+
+    const articleStructuredData = `{"@context":"https://schema.org","@type":"Article","name":"${data.titleH1}","author":{"@type":"Person","name":"Ramilson Silva","url":"${domain}/article/${slug}"},"datePublished":"${post.first_publication_date}","image":"${data.banner.source}","headline":"${data.titleH1}","articleBody":"${allContentString}"}`
+
     return (
         <>
-        <Header />
-        <div className="bg-[#fff] defaultHeight">
-            <div className="mainContainer pt-[50px]">
-                <Banner source={data.banner.source} alt={data.banner.altText} />
-                <TitlePost text={data.titleH1} />
-                <SubTitle text={data.subtitleH2} />
-                <ReleaseInfos date={data.releaseDate} author={data.author} />
+            <script type="application/ld+json" dangerouslySetInnerHTML={{__html: articleStructuredData}} />
+            <Header />
+            <div className="bg-[#fff] defaultHeight">
+                <div className="mainContainer pt-[50px]">
+                    <Banner source={data.banner.source} alt={data.banner.altText} />
+                    <TitlePost text={data.titleH1} />
+                    <SubTitle text={data.subtitleH2} />
+                    <ReleaseInfos date={data.releaseDate} author={data.author} />
 
-                <article className={`contentPost mb-[100px]`} dangerouslySetInnerHTML={{__html: data.content}} />
+                    <article className={`contentPost mb-[100px]`} dangerouslySetInnerHTML={{__html: data.content}} />
+                </div>
             </div>
-        </div>
         </>
     );
 }
