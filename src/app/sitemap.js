@@ -10,7 +10,7 @@ export default async function sitemap() {
         
     allPosts.results.map((post, index) => {
         postsXml.push({ 
-            url: `${domain}/artigo/${post.uid}`,
+            url: `${domain}artigo/${post.uid}`,
             lastModified: `${post.last_publication_date}`,
             changeFrequency: `monthly`,
             priority: 0.9
@@ -19,7 +19,7 @@ export default async function sitemap() {
 
     return [
         {
-            url: `${domain}/`,
+            url: `${domain}`,
             lastModified: new Date(),
             changeFrequency: 'weekly',
             priority: 1
