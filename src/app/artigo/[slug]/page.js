@@ -1,3 +1,5 @@
+export const fetchCache = 'force-no-store';
+
 import { createClient } from "@/prismicio";
 import { asHTML } from "@prismicio/client";
 
